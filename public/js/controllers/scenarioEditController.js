@@ -1,5 +1,5 @@
-angular.module('scenarioApp', [])
-  .controller('ScenarioController', ['$scope', function ($scope) {
+angular.module('myApp', [])
+  .controller('ScenarioEditController', ['$scope', function ($scope) {
         $scope.leftLatitude = '';
         $scope.leftLongitude = '';
         $scope.rightLatitude = '';
