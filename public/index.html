@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROS UI</title>
+    <link href="css/all.min.css" rel="stylesheet">
+    <link href="css/tailwind.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/scenarioEditController.js"></script>
+</head>
+
+<body class="font-sans bg-gray-100">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md w-full">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-800">ROS UI</a>
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div id="menu" class="hidden md:block">
+                <ul class="flex space-x-4">
+                    <li><a href="#/scenario-edit" class="text-gray-600 hover:text-gray-800">想定编辑</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-800">力量编成</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-800">方案拟制</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-800">效果评估</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-800">集群模拟</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 视图容器 -->
+    <div class="container mx-auto px-4 py-8" ng-view></div>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+     <style>
+        /* 移除导航栏链接下划线 */
+        nav a {
+            text-decoration: none;
+        } /* 固定导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        /* 给视图容器添加顶部外边距，避免被导航栏遮挡 */
+        [ng-view] {
+            margin-top: 64px; /* 根据导航栏高度调整 */
+        }
+    </style>
+</body>
+
+</html>

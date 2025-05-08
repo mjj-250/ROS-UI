@@ -1,0 +1,13 @@
+{
+  "name": "angular-express-bootstrap-app",
+  "version": "1.0.0",
+  "description": "A simple app with AngularJS, Express and Bootstrap",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
+    
