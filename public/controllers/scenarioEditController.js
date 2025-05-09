@@ -1,5 +1,7 @@
-angular.module('myApp', [])
+// 注意：这里不要重复定义模块，使用已有的'myApp'
+angular.module('myApp')
   .controller('ScenarioEditController', ['$scope', function ($scope) {
+        // 初始化数据模型
         $scope.leftLatitude = '';
         $scope.leftLongitude = '';
         $scope.rightLatitude = '';
@@ -9,8 +11,9 @@ angular.module('myApp', [])
         $scope.leftMapButtonText = '加载地图';
         $scope.rightMapButtonText = '加载地图';
 
-        $scope.loadMap = function (side) {
-            // 模拟从.world文件获取经纬度，实际使用时需替换为真实的文件读取逻辑
+        // 定义业务逻辑方法
+        $scope.itude = function (side) {
+            // 模拟从.world文件获取经纬度
             const mockLatitude = '30.000';
             const mockLongitude = '120.000';
 
@@ -25,19 +28,5 @@ angular.module('myApp', [])
             }
         };
 
-        $scope.addDroneConfig = function (side) {
-            if (side === 'left') {
-                $scope.leftDroneConfigs.push({ type: 'type1', configOption: 'config1', number: 0 });
-            } else {
-                $scope.rightDroneConfigs.push({ type: 'type1', configOption: 'config1', number: 0 });
-            }
-        };
-
-        $scope.removeDroneConfig = function (index, side) {
-            if (side === 'left') {
-                $scope.leftDroneConfigs.splice(index, 1);
-            } else {
-                $scope.rightDroneConfigs.splice(index, 1);
-            }
-        };
+        
     }]);    

@@ -9,4 +9,3 @@ angular.module('myApp', ['ngRoute'])
                 redirectTo: '/scenario-edit'
             });
     }]);
-    

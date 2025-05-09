@@ -1,0 +1,357 @@
+--- 行动评估 2025-05-08 06:57:40 ---
+- 行动代号：[point], 行动坐标[[[100, -20, 10]]], 编队信息[[0]]
+- 行动效率：时间[26.00 s], 行程[206.81 m], 速度[28.64 km/h]
+- 侦查情况：已侦查2.74%的敌方区域和目标
+- 暴露情况：与敌方单位最近距离为58.42m, 由行动时间推算暴露概率为1.94%
+
+--- 行动评估 2025-05-09 09:56:00 ---
+- 行动代号：[point], 行动坐标[[[10, -10, 10]]], 编队信息[[0, 1, 8]]
+- 行动效率：时间[19.50 s], 行程[121.04 m], 速度[22.35 km/h]
+- 侦查情况：已侦查0.00%的敌方区域和目标
+- 暴露情况：与敌方单位最近距离为71.15m, 由行动时间推算暴露概率为0.00%
+
+--- 行动评估 2025-05-09 09:57:44 ---
+- 行动代号：[tour], 行动坐标[[[80, -100, 20], [90, -100, 20], [90, -110, 20], [80, -110, 20], [80, -110, 30], [80, -100, 30], [90, -100, 30], [90, -100, 20]]], 编队信息[[2, 3]]
+- 行动效率：时间[43.00 s], 行程[300.02 m], 速度[25.12 km/h]
+- 侦查情况：已侦查55.84%的敌方区域和目标
+- 暴露情况：与敌方单位最近距离为17.69m, 由行动时间推算暴露概率为39.48%
+
+--- 行动评估 2025-05-09 10:00:08 ---
+- 行动代号：[search], 行动坐标[[[100, -100], [140, -140], [100, -140]]], 编队信息[[4, 5]]
+- 行动效率：时间[58.50 s], 行程[489.37 m], 速度[30.12 km/h]
+- 侦查情况：已侦查27.45%的敌方区域和目标
+- 暴露情况：与敌方单位最近距离为33.32m, 由行动时间推算暴露概率为19.41%
+
+--- 行动评估 2025-05-09 10:00:52 ---
+- 行动代号：[track], 行动坐标[['ugv_10']], 编队信息[[6, 7]]
+- 行动效率：时间[18.00 s], 行程[155.08 m], 速度[31.02 km/h]
+- 侦查情况：已侦查13.59%的敌方区域和目标
+- 暴露情况：与敌方单位最近距离为44.19m, 由行动时间推算暴露概率为9.61%
+
+
+
+<?xml version="1.0"?>
+<launch>
+     <!-- iris_0 -->
+     <group ns="iris_0">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="0"/>
+            <arg name="ID_in_group" value="0"/>
+            <arg name="fcu_url" default="udp://:24540@localhost:34580"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-100"/>
+            <arg name="y" value="48"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18570"/>
+            <arg name="mavlink_tcp_port" value="4560"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_1 -->
+     <group ns="iris_1">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="1"/>
+            <arg name="ID_in_group" value="1"/>
+            <arg name="fcu_url" default="udp://:24541@localhost:34581"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-97"/>
+            <arg name="y" value="48"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="34581"/>
+            <arg name="mavlink_tcp_port" value="4561"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_2 -->
+     <group ns="iris_2">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="2"/>
+            <arg name="ID_in_group" value="2"/>
+            <arg name="fcu_url" default="udp://:24542@localhost:34582"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-94"/>
+            <arg name="y" value="48"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18572"/>
+            <arg name="mavlink_tcp_port" value="4562"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_3 -->
+     <group ns="iris_3">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="3"/>
+            <arg name="ID_in_group" value="3"/>
+            <arg name="fcu_url" default="udp://:24543@localhost:34583"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-100"/>
+            <arg name="y" value="51"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18573"/>
+            <arg name="mavlink_tcp_port" value="4563"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_4 -->
+     <group ns="iris_4">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="4"/>
+            <arg name="ID_in_group" value="4"/>
+            <arg name="fcu_url" default="udp://:24544@localhost:34584"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-97"/>
+            <arg name="y" value="51"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18574"/>
+            <arg name="mavlink_tcp_port" value="4564"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_5 -->
+     <group ns="iris_5">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="5"/>
+            <arg name="ID_in_group" value="5"/>
+            <arg name="fcu_url" default="udp://:24545@localhost:34585"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-94"/>
+            <arg name="y" value="51"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18575"/>
+            <arg name="mavlink_tcp_port" value="4565"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_6 -->
+     <group ns="iris_6">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="6"/>
+            <arg name="ID_in_group" value="6"/>
+            <arg name="fcu_url" default="udp://:24546@localhost:34586"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-100"/>
+            <arg name="y" value="54"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18576"/>
+            <arg name="mavlink_tcp_port" value="4566"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_7 -->
+     <group ns="iris_7">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="7"/>
+            <arg name="ID_in_group" value="7"/>
+            <arg name="fcu_url" default="udp://:24547@localhost:34587"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-97"/>
+            <arg name="y" value="54"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18577"/>
+            <arg name="mavlink_tcp_port" value="4567"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- iris_8 -->
+     <group ns="iris_8">
+        <!-- MAVROS and vehicle configs -->
+            <arg name="ID" value="8"/>
+            <arg name="ID_in_group" value="8"/>
+            <arg name="fcu_url" default="udp://:24548@localhost:34588"/>
+        <!-- PX4 SITL and vehicle spawn -->
+        <include file="$(find px4)/launch/single_vehicle_spawn_xtd.launch">
+            <arg name="x" value="-94"/>
+            <arg name="y" value="54"/>
+            <arg name="z" value="3"/>
+            <arg name="R" value="0"/>
+            <arg name="P" value="0"/>
+            <arg name="Y" value="0"/>
+            <arg name="vehicle" value="iris"/>
+            <arg name="sdf" value="iris_blue"/>
+            <arg name="mavlink_udp_port" value="18578"/>
+            <arg name="mavlink_tcp_port" value="4568"/>
+            <arg name="ID" value="$(arg ID)"/>
+            <arg name="ID_in_group" value="$(arg ID_in_group)"/>
+        </include>
+        <!-- MAVROS -->
+        <include file="$(find mavros)/launch/px4.launch">
+            <arg name="fcu_url" value="$(arg fcu_url)"/>
+            <arg name="gcs_url" value=""/>
+            <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+            <arg name="tgt_component" value="1"/>
+        </include>
+    </group>
+     <!-- ugv_0 -->
+     <group ns="ugv_0">
+        <param name="robot_description"
+               command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle4-6_blue.xacro' roboname:='ugv_0'" />
+        <include file="$(find catvehicle)/launch/catvehicle.launch">
+        <arg name="robot_name" value="ugv_0"/>
+        <arg name="init_pose" value="-x -85 -y 50 -z 3 -R 0 -P 0 -Y -0.6"/>
+        <arg name="config_file" value="catvehicle_control.yaml"/>
+        <arg name="obstaclestopper" value="false"/>
+        </include>
+    </group>
+     <!-- ugv_10 -->
+     <group ns="ugv_10">
+        <param name="robot_description"
+               command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle4-6_red.xacro' roboname:='ugv_10'" />
+        <include file="$(find catvehicle)/launch/catvehicle.launch">
+        <arg name="robot_name" value="ugv_10"/>
+        <arg name="init_pose" value="-x 150 -y -105 -z 1 -R 0 -P 0 -Y -2"/>
+        <arg name="config_file" value="catvehicle_control.yaml"/>
+        <arg name="obstaclestopper" value="false"/>
+        </include>
+    </group>
+     <!-- ugv_11 -->
+     <group ns="ugv_11">
+        <param name="robot_description"
+               command="$(find xacro)/xacro.py '$(find catvehicle)/urdf/catvehicle4-6_red.xacro' roboname:='ugv_11'" />
+        <include file="$(find catvehicle)/launch/catvehicle.launch">
+        <arg name="robot_name" value="ugv_11"/>
+        <arg name="init_pose" value="-x 150 -y -100 -z 1 -R 0 -P 0 -Y -2"/>
+        <arg name="config_file" value="catvehicle_control.yaml"/>
+        <arg name="obstaclestopper" value="false"/>
+        </include>
+    </group>
+
+             
+</launch>
+
+task: ['point', 'tour', 'search','track']
+task_cnt: [1, 1,1, 20]  # 对应任务次数
+task_form: [[0, 1 , 8], [2, 3], [4 , 5],[6 , 7]]  # 对应任务编队
+poses: [
+  [[10, -10, 10]],
+  [[80, -100, 20], [90, -100, 20], [90, -110, 20], [80, -110, 20], [80, -110, 30], [80, -100, 30], [90, -100, 30], [90, -100, 20]],
+  [[100, -100], [140, -140], [100, -140]],
+  ['ugv_10']
+]
+
+
+
+world: 'outdoor3'
+
+# 我方阵营
+init_pos: [-100, 45, 3]
+type_name: ['iris']
+type_num: [9]
+type_row: [3]
+
+# 敌方阵营
+enemy_init_pos: [150, -110, 1.5]
+enemy_type_name: ['ugv']
+enemy_type_num: [2]
+enemy_type_row: [2]

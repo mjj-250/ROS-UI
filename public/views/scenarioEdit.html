@@ -1,195 +1,179 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<!-- 只包含视图内容，不包含HTML, HEAD, BODY等标签 -->
+<div class="container">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>想定编辑</title>
-    <link href="../css/all.min.css" rel="stylesheet">
-    <link href="../css/tailwind.min.css" rel="stylesheet">
-    <script src="../js/controllers/scenarioEditController.js"></script>
-</head>
 
-<body ng-controller="ScenarioEditController">
-    <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="block">
-                <!-- 左侧块内容 -->
-                <h3>左侧内容</h3>
-                <div class="input-group">
-                    <label for="left-latitude">纬度:</label>
-                    <input type="text" id="left-latitude" ng-model="leftLatitude">
-                    <label for="left-longitude">经度:</label>
-                    <input type="text" id="left-longitude" ng-model="leftLongitude">
-                    <button class="btn btn-primary" ng-click="loadMap('left')" ng-bind="leftMapButtonText"></button>
+
+
+
+
+
+
+
+
+        <div class="block">
+            <!-- 左侧块内容 -->
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">左侧内容</h3>
+            <div class="input-group flex flex-wrap gap-4 mb-6">
+                <div class="form-field flex-1 min-w-[180px]">
+                    <label for="left-latitude" class="block text-sm font-medium text-gray-700 mb-1">纬度:</label>
+                    <input type="text" id="left-latitude" ng-model="leftLatitude" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <h4>无人机配置</h4>
-                <div id="left-drone-config">
-                    <div class="input-group" ng-repeat="config in leftDroneConfigs">
-                        <label for="{{'left-drone-type-' + $index + 1}}">无人机类型:</label>
-                        <select id="{{'left-drone-type-' + $index + 1}}" ng-model="config.type">
-                            <option value="type1">类型1</option>
-                            <option value="type2">类型2</option>
-                            <option value="type3">类型3</option>
-                        </select>
-                        <label for="{{'left-drone-config-' + $index + 1}}">配置:</label>
-                        <select id="{{'left-drone-config-' + $index + 1}}" ng-model="config.configOption">
-                            <option value="config1">配置1</option>
-                            <option value="config2">配置2</option>
-                            <option value="config3">配置3</option>
-                        </select>
-                        <label for="{{'left-drone-number-' + $index + 1}}">数量:</label>
-                        <input type="number" id="{{'left-drone-number-' + $index + 1}}" ng-model="config.number">
-                        <button class="btn btn-danger" ng-click="removeDroneConfig($index, 'left')">删除</button>
-                    </div>
+                <div class="form-field flex-1 min-w-[180px]">
+                    <label for="left-longitude" class="block text-sm font-medium text-gray-700 mb-1">经度:</label>
+                    <input type="text" id="left-longitude" ng-model="leftLongitude" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-                <button class="btn btn-primary add-btn" ng-click="addDroneConfig('left')">添加无人机配置</button>
+                <div class="form-field flex items-end">
+                    <button class="btn btn-primary px-4 py-2 rounded-md" ng-click="loadMap()" ng-bind="leftMapButtonText"></button>
+                </div>
             </div>
-            <div class="block">
-                <!-- 右侧块内容 -->
-                <h3>右侧内容</h3>
-                <div class="input-group">
-                    <label for="right-latitude">纬度:</label>
-                    <input type="text" id="right-latitude" ng-model="rightLatitude">
-                    <label for="right-longitude">经度:</label>
-                    <input type="text" id="right-longitude" ng-model="rightLongitude">
-                    <button class="btn btn-primary" ng-click="loadMap('right')" ng-bind="rightMapButtonText"></button>
-                </div>
-                <h4>无人机配置</h4>
-                <div id="right-drone-config">
-                    <div class="input-group" ng-repeat="config in rightDroneConfigs">
-                        <label for="{{'right-drone-type-' + $index + 1}}">无人机类型:</label>
-                        <select id="{{'right-drone-type-' + $index + 1}}" ng-model="config.type">
+            
+            <h4 class="text-lg font-semibold text-gray-700 mb-3">无人机配置</h4>
+            <div id="left-drone-config">
+                <div class="drone-config-row bg-gray-50 p-3 rounded-md mb-3 flex flex-wrap gap-3 items-end">
+                    <div class="form-field flex-1 min-w-[150px]">
+                        <label for="{{'left-drone-type-' + $index + 1}}" class="block text-sm font-medium text-gray-700 mb-1">无人机类型:</label>
+                        <select id="{{'left-drone-type-' + $index + 1}}" ng-model="config.type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="type1">类型1</option>
                             <option value="type2">类型2</option>
                             <option value="type3">类型3</option>
                         </select>
-                        <label for="{{'right-drone-config-' + $index + 1}}">配置:</label>
-                        <select id="{{'right-drone-config-' + $index + 1}}" ng-model="config.configOption">
+                    </div>
+                    <div class="form-field flex-1 min-w-[150px]">
+                        <label for="{{'left-drone-config-' + $index + 1}}" class="block text-sm font-medium text-gray-700 mb-1">配置:</label>
+                        <select id="{{'left-drone-config-' + $index + 1}}" ng-model="config.configOption" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="config1">配置1</option>
                             <option value="config2">配置2</option>
                             <option value="config3">配置3</option>
                         </select>
-                        <label for="{{'right-drone-number-' + $index + 1}}">数量:</label>
-                        <input type="number" id="{{'right-drone-number-' + $index + 1}}" ng-model="config.number">
-                        <button class="btn btn-danger" ng-click="removeDroneConfig($index, 'right')">删除</button>
+                    </div>
+                    <div class="form-field flex-1 min-w-[100px]">
+                        <label for="{{'left-drone-number-' + $index + 1}}" class="block text-sm font-medium text-gray-700 mb-1">数量:</label>
+                        <input type="number" id="{{'left-drone-number-' + $index + 1}}" ng-model="config.number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="form-field">
+                        <button class="btn btn-danger px-3 py-2 rounded-md" ng-click="removeDroneConfig($index, 'left')">删除</button>
                     </div>
                 </div>
-                <button class="btn btn-primary add-btn" ng-click="addDroneConfig('right')">添加无人机配置</button>
+            </div>
+            
+            <div class="mt-4 text-right">
+                <button class="btn btn-primary px-4 py-2 rounded-md" ng-click="addDroneConfig('left')">添加无人机配置</button>
+            </div>
+        </div>
+        
+        <div class="block">
+            <!-- 右侧块内容 -->
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">右侧内容</h3>
+            <div class="input-group flex flex-wrap gap-4 mb-6">
+                <div class="form-field flex-1 min-w-[180px]">
+                    <label for="right-latitude" class="block text-sm font-medium text-gray-700 mb-1">纬度:</label>
+                    <input type="text" id="right-latitude" ng-model="rightLatitude" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="form-field flex-1 min-w-[180px]">
+                    <label for="right-longitude" class="block text-sm font-medium text-gray-700 mb-1">经度:</label>
+                    <input type="text" id="right-longitude" ng-model="rightLongitude" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="form-field flex items-end">
+                    <button class="btn btn-primary px-4 py-2 rounded-md" ng-click="loadMap()" ng-bind="rightMapButtonText"></button>
+                </div>
+            </div>
+            
+            <h4 class="text-lg font-semibold text-gray-700 mb-3">无人机配置</h4>
+            <div id="right-drone-config">
+                <div class="drone-config-row bg-gray-50 p-3 rounded-md mb-3 flex flex-wrap gap-3 items-end">
+                    <div class="form-field flex-1 min-w-[150px]">
+                        <label for="{{'right-drone-type-' + $index + 1}}" class="block text-sm font-medium text-gray-700 mb-1">无人机类型:</label>
+                        <select id="{{'right-drone-type-' + $index + 1}}" ng-model="config.type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="type1">类型1</option>
+                            <option value="type2">类型2</option>
+                            <option value="type3">类型3</option>
+                        </select>
+                    </div>
+                    <div class="form-field flex-1 min-w-[150px]">
+                        <label for="{{'right-drone-config-' + $index + 1}}" class="block text-sm font-medium text-gray-700 mb-1">配置:</label>
+                        <select id="{{'right-drone-config-' + $index + 1}}" ng-model="config.configOption" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="config1">配置1</option>
+                            <option value="config2">配置2</option>
+                            <option value="config3">配置3</option>
+                        </select>
+                    </div>
+                    <div class="form-field flex-1 min-w-[100px]">
+                        <label for="{{'right-drone-number-' + $index + 1}}" class="block text-sm font-medium text-gray-700 mb-1">数量:</label>
+                        <input type="number" id="{{'right-drone-number-' + $index + 1}}" ng-model="config.number" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="form-field">
+                        <button class="btn btn-danger px-3 py-2 rounded-md" ng-click="removeDroneConfig($index, 'right')">删除</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-right">
+                <button class="btn btn-primary px-4 py-2 rounded-md" ng-click="addDroneConfig('right')">添加无人机配置</button>
             </div>
         </div>
     </div>
-    <style>
-        /* 整体页面样式 */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f7fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+</div>
+<style>
+    /* 基础样式 */
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc;
+        margin: 0;
+        padding: 2rem;
+    }
 
-        /* 容器样式 */
-        .container {
-            max-width: 1200px;
-            width: 90%;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            padding: 2rem;
-        }
+    /* 容器样式 */
+    .container {
+        max-width: 1600px;
+        margin: 0 auto;
+    }
 
-        /* 左右块样式 */
+    /* 左右块样式 */
+    .block {
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 2rem;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .block:hover {
+        transform: translateY(-2px);
+    }
+
+    /* 输入字段样式 */
+    .form-field input,
+    .form-field select {
+        height: 2.5rem;
+        line-height: 1.5;
+    }
+
+    /* 按钮样式 */
+    .btn {
+        height: 2.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        line-height: 1.5;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 1024px) {
         .block {
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
             padding: 1.5rem;
-            margin: 1rem;
-            transition: transform 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            position: relative;
         }
-
-        .block:hover {
-            transform: scale(1.02);
-        }
-
-        /* 标题样式 */
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 1rem;
-        }
-
-        h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        /* 输入组样式 */
+        
         .input-group {
-            display: flex;
-            align-items: center;
             gap: 1rem;
-            margin-bottom: 1rem;
         }
-
-        .input-group label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #4a5568;
-        }
-
-        .input-group input,
-        .input-group select {
-            padding: 0.5rem 0.75rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* 按钮样式 */
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .btn-primary {
-            background-color: #4299e1;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #3182ce;
-        }
-
-        .btn-danger {
-            background-color: #f56565;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #e53e3e;
-        }
-
-        /* 添加按钮位置样式 */
-        .add-btn {
-            align-self: flex-end;
-            margin-top: auto;
-        }
-    </style>
-</body>
-
-</html>    
+    }
+</style>
